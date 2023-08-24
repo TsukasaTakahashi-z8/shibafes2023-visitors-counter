@@ -18,7 +18,7 @@
       - [5. 生成されたUF2ファイルを、RaspberryPiPicoにコピー](#5-生成されたuf2ファイルを-raspberrypipicoにコピー)
         - [マウントされていなかった場合の対処](#マウントされていなかった場合の対処)
         - [マウント後](#マウント後)
-      - [(おまけ)デバッグなどでUSBシリアルを利用する場合](#おまけデバッグなどでusbシリアルを利用する場合)
+      - [(おまけ1)デバッグなどでUSBシリアルを利用する場合](#おまけ1デバッグなどでusbシリアルを利用する場合)
 
 <!-- /code_chunk_output -->
 
@@ -107,8 +107,8 @@ Disk model: RP2
 sudoでマウントします。ここで、数字が入ったものを使うことに注意してください。
 
 ```bash
-sudo mkdir -p /media/cesium133/RPI-RP2
-sudo mount /dev/sd？1 /media/cesium133/RPI-RP2
+sudo mkdir -p /media/$USER/RPI-RP2
+sudo mount /dev/sd？1 /media/$USER/RPI-RP2
 ```
 
 ##### マウント後
@@ -117,12 +117,12 @@ sudo mount /dev/sd？1 /media/cesium133/RPI-RP2
 作ったUF2ファイルをコピーします。
 
 ```bash
-sudo cp ./seven-segment-display.uf2 /media/cesium133/RPI-RP2/seven-segment-display.uf2
+sudo cp ./seven-segment-display.uf2 /media/$USER/RPI-RP2/seven-segment-display.uf2
 ```
 
 すると、Picoが自動で再起動して書き込んだプログラムが実行される。
 
-#### (おまけ)デバッグなどでUSBシリアルを利用する場合
+#### (おまけ1)デバッグなどでUSBシリアルを利用する場合
 
 CMakeLists.txtに以下を追加
 
@@ -139,4 +139,3 @@ pico_enable_stdio_uart(seven-segment-display 0)
 ```bash
 sudo minicom -b 115200 -o -D /dev/ttyACM0
 ```
-
