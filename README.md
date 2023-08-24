@@ -10,7 +10,7 @@
 
 - [shibafes2023-visitors-counter](#shibafes2023-visitors-counter)
   - [開発環境構築(Linux)](#開発環境構築linux)
-    - [Raspberry Pi Pico用](#raspberry-pi-pico用)
+    - [Raspberry Pi Pico](#raspberry-pi-pico)
       - [1. RaspberryPiSDKのリポジトリクローン](#1-raspberrypisdkのリポジトリクローン)
       - [2. 以下をインストール](#2-以下をインストール)
       - [3. `PICO_SDK_PATH`を設定](#3-pico_sdk_pathを設定)
@@ -19,6 +19,7 @@
         - [マウントされていなかった場合の対処](#マウントされていなかった場合の対処)
         - [マウント後](#マウント後)
       - [(おまけ1)デバッグなどでUSBシリアルを利用する場合](#おまけ1デバッグなどでusbシリアルを利用する場合)
+      - [(おまけ2)writer.shについて](#おまけ2writershについて)
 
 <!-- /code_chunk_output -->
 
@@ -139,3 +140,19 @@ pico_enable_stdio_uart(seven-segment-display 0)
 ```bash
 sudo minicom -b 115200 -o -D /dev/ttyACM0
 ```
+
+#### (おまけ2)writer.shについて
+
+writer.shをpicoディレクトリ内で実行することで、ビルドをして書き込みしてくれます。
+
+```bash
+$ fdisk -l | grep RP2 -B 1  //Picoがどのディスクか調べる
+ディスク /dev/sd？: 128 MiB, 134217728 バイト, 262144 セクタ
+Disk model: RP2 
+
+//picoディレクトリ内で
+$ bash ./writer.sh sd? {PICO_SDK_PATH}
+```
+
+{PICO_SDK_PATH}については、3.を確認してください。
+そのままの場合は、~/pico/pico-sdkです。
