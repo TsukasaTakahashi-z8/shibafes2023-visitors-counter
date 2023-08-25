@@ -16,7 +16,7 @@ int main() {
     int n = 0;
     while (true) {
         n++;
-        printf("count:%d\n", n);
+        printf("count: %d\n", n);
         gpio_put(LED_PIN, 1);
         sleep_ms(100);
         gpio_put(LED_PIN, 0);

@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-if [ -z "$1" ] && [ -z "$2" ]
+if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]
 then
     echo "引数が指定されていません。"
     fdisk -l | grep RP2 -B 1
@@ -29,7 +29,7 @@ else
     cmake ..
     make -j4
     cd ..
-    sudo cp ./build/seven-segment-display.uf2 /media/$USER/RPI-RP2/seven-segment-display.uf2
+    sudo cp ./build/$3/$3.uf2 /media/$USER/RPI-RP2/
     echo "copied."
     sudo umount /media/$USER/RPI-RP2
     echo "unmounted"

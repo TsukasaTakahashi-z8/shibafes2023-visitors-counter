@@ -7,7 +7,7 @@
 
 <!-- code_chunk_output -->
 
-- [Raspberry Pi Picoのための](#raspberry-pi-picoのための)
+- [Raspberry Pi Picoのための環境構築](#raspberry-pi-picoのための環境構築)
   - [picoへプログラム書き込み](#picoへプログラム書き込み)
     - [1. RaspberryPiSDKのリポジトリクローン](#1-raspberrypisdkのリポジトリクローン)
     - [2. 以下をインストール](#2-以下をインストール)
@@ -86,7 +86,7 @@ ls | grep *.uf2  //uf2ファイルの存在確認
 
 BOOTSELを押しながら、RaspberryPiPicoをこのPCにUSB接続し、マウントする。デスクトップ版は、自動でマウントされるらしい。  
 RPi-RP2が認識されるので、そこに先程の`(ファイル名).uf2`をコピーする。`cp`コマンドでなくとも可。  
-ここでは、`seven-segment-display.uf2`。  
+ここでは、`seven-segment-display.uf2`または`GPIOtest`。  
 
 #### マウントされていなかった場合の対処
 
@@ -112,7 +112,7 @@ sudo mount /dev/sd？1 /media/$USER/RPI-RP2
 作ったUF2ファイルをコピーします。
 
 ```bash
-sudo cp ./seven-segment-display.uf2 /media/$USER/RPI-RP2/seven-segment-display.uf2
+sudo cp ./seven-segment-display.uf2 /media/$USER/RPI-RP2/
 ```
 
 すると、Picoが自動で再起動して書き込んだプログラムが実行される。
@@ -145,8 +145,9 @@ $ fdisk -l | grep RP2 -B 1  //Picoがどのディスクか調べる
 Disk model: RP2 
 
 //picoディレクトリ内で
-$ bash ./writer.sh sd? {PICO_SDK_PATH}
+$ bash ./writer.sh sd? {PICO_SDK_PATH} seven-segment-display
 ```
 
 {PICO_SDK_PATH}については、3.を確認してください。
-そのままの場合は、~/pico/pico-sdkです。
+そのままの場合は、~/pico/pico-sdkです。  
+また、seven-segment-displayではなく、GPIOtestも可。
