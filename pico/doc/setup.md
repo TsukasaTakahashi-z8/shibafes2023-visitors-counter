@@ -137,17 +137,15 @@ sudo minicom -b 115200 -o -D /dev/ttyACM0
 
 ## (おまけ2)writer.shについて
 
-writer.shをpicoディレクトリ内で実行することで、ビルドをして書き込みしてくれます。
+writer.shをpico/srcディレクトリ内で実行することで、ビルドをして書き込みしてくれます。
 
 ```bash
-$ fdisk -l | grep RP2 -B 1  //Picoがどのディスクか調べる
-ディスク /dev/sd？: 128 MiB, 134217728 バイト, 262144 セクタ
-Disk model: RP2 
+readlink -f /dev/disk/by-label/RPI-RP2
 
 //picoディレクトリ内で
-$ bash ./writer.sh sd? {PICO_SDK_PATH} seven-segment-display
+bash ./writer.sh {PICO_SDK_PATH} seven-segment-display
 ```
 
 {PICO_SDK_PATH}については、3.を確認してください。
 そのままの場合は、~/pico/pico-sdkです。  
-また、seven-segment-displayではなく、GPIOtestも可。
+また、seven-segment-displayではなく、GPIOtestなども可。

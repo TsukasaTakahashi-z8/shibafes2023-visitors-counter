@@ -1,13 +1,14 @@
 #!/usr/bin/bash
-if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]
+if [ -z "$1" ] || [ -z "$2" ]
 then
     echo "引数が指定されていません。"
-    fdisk -l | grep RP2 -B 1
     exit 0
 else
+    RPI=`readlink -f /dev/disk/by-label/RPI-RP2`
     echo $1
     echo $2
-    export PICO_SDK_PATH="$2"
+    echo $RPI
+    export PICO_SDK_PATH="$1"
 
     if [ -d ./build ]
     then
@@ -19,9 +20,9 @@ else
     then
         echo "RPI-RP2 is already mounted"
     else
-        echo "mount /dev/$1 $USER /media/$USER/RPI-RP2"
+        echo "mount $RPI /media/$USER/RPI-RP2"
         sudo mkdir -p /media/$USER/RPI-RP2
-        sudo mount /dev/$11 /media/$USER/RPI-RP2
+        sudo mount $RPI /media/$USER/RPI-RP2
     fi
 
     mkdir ./build
@@ -29,7 +30,7 @@ else
     cmake ..
     make -j4
     cd ..
-    sudo cp ./build/$3/$3.uf2 /media/$USER/RPI-RP2/
+    sudo cp ./build/$2/$2.uf2 /media/$USER/RPI-RP2/
     echo "copied."
     sudo umount /media/$USER/RPI-RP2
     echo "unmounted"
