@@ -10,26 +10,53 @@ int main() {
 
     int i;
     uint LED_PIN_TMP;
-    for (i=0; i<=28; i++) {
+    for (i=0; i<=14; i++) {
         LED_PIN_TMP = i;
-        if (i <= 22 || i >= 26) {
+        if (i == 0 || 2<=i) {
             gpio_init(LED_PIN_TMP);
             gpio_set_dir(LED_PIN_TMP, true);
         }
     }
 
-    while (true) {
-        for (i=0; i<=28; i++) {
-            LED_PIN_TMP = i;
-            if (i <= 22 || i >= 26) {
+    int all_7seg(bool tmp) {
+        // 88888
+        
+        if (tmp) {
+            gpio_put(LED_PIN, 1);
+
+            // A~G
+            for (i=0; i<=8; i++) {
+                LED_PIN_TMP = i;
                 gpio_put(LED_PIN_TMP, 1);
-                gpio_put(LED_PIN, 1);
-                sleep_ms(150);
+            }
+            // 桁
+            for (i=10; i<=14; i++) {
+                LED_PIN_TMP = i;
                 gpio_put(LED_PIN_TMP, 0);
-                gpio_put(LED_PIN, 0);
-                sleep_ms(150);
             }
         }
+        else {
+            gpio_put(LED_PIN, 0);
+
+            // A~G
+            for (i=0; i<=8; i++) {
+                LED_PIN_TMP = i;
+                gpio_put(LED_PIN_TMP, 0);
+            }
+            // 桁
+            for (i=10; i<=14; i++) {
+                LED_PIN_TMP = i;
+                gpio_put(LED_PIN_TMP, 0);
+            }
+        }
+        return 0;
+    }
+
+    while (true) {
+        all_7seg(true);
+        sleep_ms(300);
+        all_7seg(false);
+        sleep_ms(150);
     }
 #endif
 }
