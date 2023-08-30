@@ -4,10 +4,9 @@ RaspberryPiPicoに書き込むプログラムです。
 
 ## Sources
 
-| path                         | 説明                           |
-| ---                          | ---                            |
-| ./src/seven-segment-display/ | 7セグの制御用コード            |
-| ./src/GPIOtest/              | GPIO、配線のテストをするコード |
+| path               | 説明                           |
+| ---                | ---                            |
+| ./src/7segment.py/ | UART受信&7セグの制御用コード   |
 
 ## Documents
 
